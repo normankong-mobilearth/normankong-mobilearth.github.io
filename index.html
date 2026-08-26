@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#12110f" />
+    <meta name="description" content="Plot plants a tiny sculptural park whose terrain is a QR code. Paste a link, share it, or embed it on any site." />
+    <title>Plot — sculptural QR parks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;0,9..144,650;1,9..144,540&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <a class="skip" href="#stage">Skip to park</a>
+      <header class="chrome" id="chrome">
+        <div class="brand-row">
+          <p class="brand">Plot<span class="brand-dot" aria-hidden="true"></span></p>
+          <p class="tagline">A tiny sculptural park. The terrain is a QR code.</p>
+        </div>
+        <form id="plant-form" class="plant" novalidate>
+          <label class="url-label" for="url">Destination URL</label>
+          <div class="url-row">
+            <input id="url" name="url" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://www.hailicorn.com" aria-describedby="url-error" />
+            <button class="primary" type="submit">Plant</button>
+          </div>
+          <p id="url-error" class="error" hidden role="alert"></p>
+        </form>
+        <div class="palette-block">
+          <p class="palette-label" id="palette-label">Palette</p>
+          <div id="palettes" class="palettes" role="radiogroup" aria-labelledby="palette-label"></div>
+        </div>
+      </header>
+
+      <main class="main">
+        <section
+          id="stage"
+          class="stage"
+          tabindex="0"
+          role="button"
+          aria-label="QR park. Press Enter or Space to switch between sculpture and scannable code."
+          data-view="sculpture"
+        >
+          <canvas id="grove" aria-hidden="true"></canvas>
+          <canvas id="scan-qr" class="scan-qr" aria-hidden="true"></canvas>
+          <canvas id="fallback-qr" hidden></canvas>
+          <p id="stage-wait" class="stage-wait">Growing the park…</p>
+          <p id="fallback-note" class="fallback-note" hidden>3D needs WebGL. This flat code is still scannable.</p>
+        </section>
+
+        <div class="tray">
+          <p id="meta" class="meta">Limestone · hailicorn.com</p>
+          <div class="actions">
+            <a id="visit" class="btn" href="https://www.hailicorn.com/" target="_blank" rel="noopener noreferrer">Visit link</a>
+            <button id="copy-link" class="btn" type="button">Copy link</button>
+            <button id="copy-embed" class="btn" type="button">Copy embed</button>
+            <button id="flatten" class="btn btn-accent" type="button">Flatten to scan</button>
+          </div>
+          <p id="hint" class="hint">Tap the park to flatten it into a scannable code.</p>
+        </div>
+      </main>
+
+      <p class="privacy">Destination URLs stay in this browser — they are only encoded into the QR you see.</p>
+      <div id="live" class="sr-only" aria-live="polite"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
